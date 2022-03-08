@@ -1,0 +1,109 @@
+keyword: program
+
+   keyword: var
+ ident: SMALLER
+ keyword: as
+ keyword: int
+ SC: ;
+
+   keyword: var
+ ident: BIGGER
+ keyword: as
+ keyword: int
+ SC: ;
+
+   keyword: var
+ ident: TEMP
+ keyword: as
+ keyword: int
+ SC: ;
+
+keyword: begin
+
+   ident: BIGGER
+ ASGN: :=
+ Built-In Procedure: readInt
+ SC: ;
+
+   ident: SMALLER
+ ASGN: :=
+ Built-In Procedure: readInt
+ SC: ;
+
+
+   keyword: if
+ ident: SMALLER
+ OP4: >
+ ident: BIGGER
+ keyword: then
+
+      ident: TEMP
+ ASGN: :=
+ ident: SMALLER
+ SC: ;
+
+      ident: TEMP1
+ ASGN: :=
+ integer: 2147483648
+ SC: ;
+
+      ident: SMALLER
+ ASGN: :=
+ ident: BIGGER
+ SC: ;
+
+      ident: BIGGER
+ ASGN: :=
+ ident: TEMP
+ SC: ;
+
+   keyword: end
+ SC: ;
+
+
+   keyword: while
+ ident: SMALLER
+ OP4: >
+ integer: 0
+ keyword: do
+
+      ident: BIGGER
+ ASGN: :=
+ ident: BIGGER
+ OP3: -
+ ident: SMALLER
+ SC: ;
+
+
+      keyword: if
+ ident: SMALLER
+ OP4: >
+ ident: BIGGER
+ keyword: then
+
+         ident: TEMP
+ ASGN: :=
+ ident: SMALLER
+ SC: ;
+
+         ident: SMALLER
+ ASGN: :=
+ ident: BIGGER
+ SC: ;
+
+         ident: BIGGER
+ ASGN: :=
+ ident: TEMP
+ SC: ;
+
+      keyword: end
+ SC: ;
+
+   keyword: end
+ SC: ;
+
+   Built-In Procedure: writeInt
+ ident: BIGGER
+ SC: ;
+
+keyword: end
