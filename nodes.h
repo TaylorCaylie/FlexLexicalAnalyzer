@@ -23,22 +23,10 @@ typedef enum {
 typedef enum TypesNodes {
     literalType,
     numberType,
-    identifierType,
+    identifierNodeType,
     operatorType
 } TypesNodes;
 
-// can either be an identifier, literal, or number
-typedef struct Node {
-    union {
-        int literalNode;
-        char* identifierNode;
-    };
-
-    TypesNodes types;
-} Node;
-
-Node *str(char* str);
-Node *lit(int value);
 
 struct declaration 
 {
@@ -50,8 +38,16 @@ struct declaration
 };
 
 // if its an operator type encapsulates another type
+// can either be an identifier, literal, or number
 typedef struct Exp {
     int expType;
+
+    union {
+        int literalNode;
+        char* identifierNode;
+    };
+
+    TypesNodes types;
 
     struct Exp *left;
     struct Exp *right;
@@ -59,6 +55,8 @@ typedef struct Exp {
 
 struct Exp *newExp(int expType, Exp *left, Exp *right);
 struct Exp *newDeclaration(struct symbolList *symbolList, char type);
+struct Exp *str(char* str);
+struct Exp *lit(int value);
 
 struct symbol 
 {

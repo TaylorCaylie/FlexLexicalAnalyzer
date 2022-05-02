@@ -5,10 +5,9 @@
 #include "nodes.h"
 #include <stdarg.h>
 
-Node* opr(int operation, int num_ops, ...);
-Node* var(char* name);
-Node* lit(int value);
-Node* str(char* str);
+Exp* var(char* name);
+Exp* lit(int value);
+Exp* str(char* str);
 
 int SymbolHash(char *symbol) {
 	unsigned int hash = 0;
@@ -56,12 +55,14 @@ struct symbol *lookUp(char *symbol) {
 		if(s->name && !strcmp(s->name, symbol)) {
 			return s;
 		}
+
 		if(!s->name) {
 			s->name = strdup(symbol);
 			s->value = 0;
 
 			return s;
 		}
+
 		if(++s >= symbolTable + NHASH) {
 			s = symbolTable;
 		}
@@ -74,10 +75,10 @@ struct symbol *lookUp(char *symbol) {
 
 
 // if the node is a literal node type
-Node *lit(int value) { 
-	Node* pntr;
+Exp *lit(int value) { 
+	Exp* pntr;
 
-	if ((pntr = malloc(sizeof(Node))) == NULL) {
+	if ((pntr = malloc(sizeof(Exp))) == NULL) {
 		yyerror("Memory out of bound!");
     }
 
@@ -87,43 +88,19 @@ Node *lit(int value) {
 	return pntr;
 }
 
-Node *str(char* str) {
-	Node* pntr;
+Exp *str(char* str) {
+	Exp* pntr;
 
-	if ((pntr = malloc(sizeof(Node))) == NULL)  // memory not available
+	if ((pntr = malloc(sizeof(Exp))) == NULL) 
 		yyerror("Memory out of bound!");
 	
-	pntr->types = identifierType;
+	pntr->types = identifierNodeType;
 	pntr->identifierNode = str;
 
 	return pntr;
 }
 
-// for nodes of operator type
-// Node* opr(int operation, int num_ops, ...) { 
-// 	va_list ap;
-// 	Exp* pntr;
-// 	int i;
-        	
-// 	if ((pntr = malloc(sizeof(Node))) == NULL)  // memory not available
-// 		yyerror("Memory out f bound!");
-
-// 	if ((pntr->op.operands = malloc(num_ops * sizeof(Node*))) == NULL) // memory not available
-// 		yyerror("Memory out of bound!");
-
-// 	pntr->types = typeOp;
-// 	pntr->op.operation = operation;
-// 	pntr->op.num_ops = num_ops;
-// 	va_start(ap, num_ops);
-
-// 	for (i = 0; i < num_ops; i++)
-// 		pntr->op.operands[i] = va_arg(ap, Node*);
-		
-// 	va_end(ap);
-// 	return pntr;
-// }
-
-
+// two possible types to be declared for a variable - either number or bool
 struct Exp *newDeclaration(struct symbolList *symbolList, char type) {
 	struct declaration *d = malloc(sizeof(struct declaration));
 
@@ -138,4 +115,19 @@ struct Exp *newDeclaration(struct symbolList *symbolList, char type) {
 	d->type = type;
 
 	return (Exp *)d;
+}
+
+struct symbolList *newSymbolList(struct symbol *symbol, struct symbolList *next) {
+	struct symbolList *sl = malloc(sizeof(struct symbolList));
+
+    	if(!sl) {
+        	yyerror("out of space");
+
+        	exit(0);
+ 	}
+ 
+    	sl->symbol = symbol;
+    	sl->next = next;
+     
+	return sl;
 }

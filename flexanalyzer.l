@@ -20,7 +20,6 @@ MULTIPLY_OP "*"
 OR "|"
 EQUAL_OP "="
 COMMA ","
-SEMICOLON ";"
 COLON ":"
 OPENINGBRACKET "["
 CLOSINGBRACKET "]"
@@ -37,7 +36,7 @@ MOD_OP "mod"
 
 OP3 [ADD_OP|SUBTRACT_OP]
 OP2 [MULTIPLY|DIV|MOD]
-SINGLECHAR [OR|EQUAL|COMMA|SEMICOLON|COLON|OPENINGBRACE|OPENINGBRACKET|OPENINGPARANTHESIS|CLOSINGBRACE|CLOSINGBRACKET|CLOSINGPARANETHESIS]
+SINGLECHAR [OR|COMMA|COLON|OPENINGBRACE|OPENINGBRACKET|OPENINGPARANTHESIS|CLOSINGBRACE|CLOSINGBRACKET|CLOSINGPARANETHESIS]
 COMPARISONS [EQ|NOTEQUAL|LESSEQUALTHAN|LESSTHAN|GREATEREQUALTHAN|GREATERTHAN|DIV|MOD]
 NUMBER [1-9][0-9]*|0 
 BOOLEX false|true
@@ -65,7 +64,23 @@ ID [A-Z][A-Z0-9]*
     return OP4;
 }
 
+"int" {
+    yylval.typeIdent = 'a';
+    return identifierType;
+}
+
+"bool" {
+    yylval.typeIdent = 'a';
+    return identifierType;
+}
+
+";" {
+     printf("SC: %s\n", yytext);
+    return yytext[0];
+}
+
 {SINGLECHAR} {
+    printf("SINGLE CHAR: %s\n", yytext);
     return yytext[0];
 }
 
@@ -122,11 +137,27 @@ ID [A-Z][A-Z0-9]*
 "end" return(END);
 "while" return(WHILE);
 "do" return(DO);
-"program" return(PROGRAM);
-"var" return(VAR);
-"as" return(AS);
-"int" return(INT);
-"bool" return(BOOL);
+"program" {
+    printf("keyword: %s\n", yytext);
+    return(PROGRAM);
+}
+"var" {
+    printf("keyword: %s\n", yytext);
+    return(VAR);
+}
+"as" {
+    printf("keyword: %s\n", yytext);
+    return(AS);
+}
+"int" {
+    printf("type: %s\n", yytext);
+    return(INT);
+}
+"bool" {
+    printf("type: %s\n", yytext);
+    return(BOOL);
+}
+
 "asgn" return(ASGN);
 
 "readInt" {
@@ -149,8 +180,7 @@ ID [A-Z][A-Z0-9]*
 
 [\n]		{yylineno++;}
 
-. { printf("Invalid character: %s\n", yytext);
-    yyerror("Error"); }
+
 %%
 
 

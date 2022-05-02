@@ -63,7 +63,8 @@
      READINT = 279,
      WRITEINT = 280,
      SYMBOL = 281,
-     ident = 282
+     ident = 282,
+     identifierType = 283
    };
 #endif
 /* Tokens.  */
@@ -92,6 +93,7 @@
 #define WRITEINT 280
 #define SYMBOL 281
 #define ident 282
+#define identifierType 283
 
 
 
@@ -108,9 +110,10 @@ typedef union YYSTYPE
     double d;
     struct symbol *symbol;
 	struct symbolList *symbolList;
+    char typeIdent;
 }
 /* Line 1529 of yacc.c.  */
-#line 114 "analyzerrules.tab.h"
+#line 117 "analyzerrules.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

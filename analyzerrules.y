@@ -19,6 +19,7 @@ into nodes that are emitted by flex */
     double d;
     struct symbol *symbol;
 	struct symbolList *symbolList;
+    char typeIdent;
 }
 
 /* declare tokens */
@@ -26,10 +27,12 @@ into nodes that are emitted by flex */
 %token PROGRAM IF THEN ELSE BEGINI END WHILE DO VAR AS INT BOOL LP RP ASGN SC
 %token <str> READINT WRITEINT 
 %token <symbol> SYMBOL ident
+%token <typeIdent> identifierType
+
 
 /* types */
-%type <statements> declarations statements statementExpression simpleExpression declaration assignment type writeInt expression factor term
-
+%type <statements> declarations statements statementExpression simpleExpression declaration assignment writeInt expression factor term
+%type <symbolList> symbolList
 
 /* start from expression */
 %start program
@@ -40,19 +43,14 @@ program:
     ;
 
 declarations:
-    declaration ';' declarations { if($3 == NULL) $$ = $1; else $$ = newExp('L', $1, $3); }
+    declaration SC declarations { if($3 == NULL) $$ = $1; else $$ = newExp('L', $1, $3); }
     | { $$ = NULL; }
     ;
 
 declaration:
-    VAR ident AS type { $$ = newDeclaration($2, $4); }
+    VAR symbolList AS identifierType { $$ = newDeclaration($2, $4); }
 	| { $$ = NULL;  }
 	;
-
-type:
-    INT { $$ = str("int");  }  
-    | BOOL { $$ = str("bool"); } 
-    ;
 
 statements:
     statementExpression	{ $$ = $1; }
@@ -83,7 +81,7 @@ expression:
 	;
 
 simpleExpression:
-   term OP3 term { $$ = newExp($2, $1, $3); }
+   term OP3 term { newDeclaration($1, $3); }
 	| term { $$ = $1; }
 	;
 
@@ -94,13 +92,17 @@ term:
 
 factor: 
     ident { $$ = str($1); }
-	| num { $$ = lit($1);
-		if(!($1 >=-2147483647 && $1 <= 2147483647)) {
-			yyerror("Integer overflow at line number "); }
- 		}
-	| boollit { $$ = lit($1); }
+    | boollit { $$ = lit($1); }
+	| num { 
+            $$ = lit($1);
+            if(!($1 >=-2147483647 && $1 <= 2147483647)) {
+                yyerror("Integer overflow"); 
+            }
+ 	    }
 	| LP expression RP { $$ = $2; }
 	;
+
+symbolList: SYMBOL { $$ = newSymbolList($1, NULL); };
 
 %%
 
