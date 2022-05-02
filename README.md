@@ -11,6 +11,17 @@ compiled and linked with the flex runtime library to produce an executable. When
 executable is run, it analyzes its input for occurrences of the regular expressions. Whenever
 it finds one, it executes the corresponding C code.
 
+flex generates a tokenizer/scanner - this tokenizer reads an input file and converts it into a series of tokens that are passed to the parser
+
+Background on bison
+Bison utilizes a .y spec file to generate a parser
+The parser reads a series of tokens and tries to determine the grammatical structure with respect to a given grammar 
+
+What is grammar? 
+Grammar is a set of formation rules for strings in a formal language. The rules decribe how to form strings from the languages alphabet (tokens) that are valid according to the languages syntax
+
+Symbol Table
+Qhash (glib.h) is used to implement the symbol table. The symbol table inserts every identifier in the table and each entry has some attributes - 
 
 Comments
 
@@ -144,3 +155,8 @@ Assignment
 Assignments are a kind of statement rather than a kind of operator. The ":=" keyword is used to separate the left hand side (which is the variable being assigned to) from the right hand side, which is an expression that must be of the same type as the left hand side.
 Built-in Procedures
 Core TL13 does not support user-defined functions or procedures, but it does support one built-in procedures "writeInt" that outputs an integer and a new-line to the console (respectively), and one user-defined function, "readInt" that reads an integer from the console. The syntax for these is hard-coded into TL13's BNF grammar.
+
+
+
+TO BUILD:
+run the build.sh script

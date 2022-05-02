@@ -14,7 +14,7 @@ begin
    end ;
 
    while SMALLER > 0 do
-      BIGGER := BIGGER - SMALLER ;
+      BIGGER := BIGGERS - SMALLER ;
 
       if SMALLER > BIGGER then
          TEMP := SMALLER ;
