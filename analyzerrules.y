@@ -67,8 +67,8 @@ statementExpression:
     ;
 
 assignment:
-    ident ASGN expression { $$ = newExp('A', $1, $3); }
-	| ident ASGN READINT { $$ = newExp('A', $1, $3); }
+    ident ASGN expression { $$ = newAssign($1, $3) }
+	| ident ASGN READINT { $$ = newAssign($1, $3); }
 	;
 
 writeInt:

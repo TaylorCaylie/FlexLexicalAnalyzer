@@ -74,6 +74,17 @@ struct symbol
 struct symbol symbolTable[NHASH];
 struct symbol *lookUp(char *);
 
+struct symbolAssign 
+{
+	int nodeType;
+
+	struct symbol *symbol;
+
+	struct Exp *v;
+};
+
+struct Exp *newAssign(struct symbol *symbol, struct Exp *v); 
+
 struct symbolList 
 {
 	struct symbol *symbol;

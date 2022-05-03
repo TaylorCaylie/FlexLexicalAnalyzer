@@ -1469,12 +1469,12 @@ yyreduce:
 
   case 15:
 #line 70 "analyzerrules.y"
-    { (yyval.statements) = newExp('A', (yyvsp[(1) - (3)].symbol), (yyvsp[(3) - (3)].statements)); ;}
+    { (yyval.statements) = newAssign((yyvsp[(1) - (3)].symbol), (yyvsp[(3) - (3)].statements)) ;}
     break;
 
   case 16:
 #line 71 "analyzerrules.y"
-    { (yyval.statements) = newExp('A', (yyvsp[(1) - (3)].symbol), (yyvsp[(3) - (3)].str)); ;}
+    { (yyval.statements) = newAssign((yyvsp[(1) - (3)].symbol), (yyvsp[(3) - (3)].str)); ;}
     break;
 
   case 17:

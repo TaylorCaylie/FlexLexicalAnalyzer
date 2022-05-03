@@ -117,6 +117,22 @@ struct Exp *newDeclaration(struct symbolList *symbolList, char type) {
 	return (Exp *)d;
 }
 
+struct Exp *newAssign(struct symbol *symbol, struct Exp *v) {
+	struct symbolAssign *sa = malloc(sizeof(struct symbolAssign));
+
+	if(!sa) {
+		yyerror("out of space");
+
+		exit(0);
+	}
+
+	sa->nodeType = ':=';
+	sa->symbol = symbol;
+	sa->v = v;
+
+	return (struct Exp *)sa;
+}
+
 struct symbolList *newSymbolList(struct symbol *symbol, struct symbolList *next) {
 	struct symbolList *sl = malloc(sizeof(struct symbolList));
 
