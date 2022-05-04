@@ -47,6 +47,8 @@ typedef struct Exp {
         char* identifierNode;
     };
 
+
+    struct symbol *symbol;
     TypesNodes types;
 
     struct Exp *left;
@@ -55,8 +57,8 @@ typedef struct Exp {
 
 struct Exp *newExp(int expType, Exp *left, Exp *right);
 struct Exp *newDeclaration(struct symbol *symbol, char type);
-struct Exp *str(char* str);
-struct Exp *lit(int value);
+struct Exp *str(struct symbol *symbol);
+struct Exp *lit(struct symbol *symbol);
 
 struct symbol 
 {

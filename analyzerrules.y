@@ -5,7 +5,7 @@
 #include <stdarg.h>
 #include <string.h>
 extern FILE *yyin;
-extern yylineno;
+extern int yylineno;
 %}
 
 
@@ -25,9 +25,10 @@ into nodes that are emitted by flex */
 
 /* declare tokens */
 
+%token <number> OP2 OP3 OP4
 %token PROGRAM IF THEN ELSE BEGINI END WHILE DO VAR AS INT BOOL LP RP ASGN SC
 %token <str> WRITEINT READINT
-%token <symbol> SYMBOL ident num boollit OP2 OP3 OP4
+%token <symbol> SYMBOL ident num boollit 
 %token <typeIdent> identifierType
 
 
@@ -82,7 +83,7 @@ expression:
 	;
 
 simpleExpression:
-   term OP3 term { newDeclaration($1, $3); }
+   term OP3 term { $$ = newExp($2, $1, $3); }
 	| term { $$ = $1; }
 	;
 
@@ -94,12 +95,7 @@ term:
 factor: 
     ident { $$ = str($1); }
     | boollit { $$ = lit($1); }
-	| num { 
-            $$ = lit($1);
-            if(!($1 >=-2147483647 && $1 <= 2147483647)) {
-                yyerror("Integer overflow"); 
-            }
- 	    }
+	| num { $$ = lit($1); }
 	| LP expression RP { $$ = $2; }
 	;
 

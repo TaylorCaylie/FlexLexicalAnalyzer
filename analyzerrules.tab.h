@@ -39,60 +39,60 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     PROGRAM = 258,
-     IF = 259,
-     THEN = 260,
-     ELSE = 261,
-     BEGINI = 262,
-     END = 263,
-     WHILE = 264,
-     DO = 265,
-     VAR = 266,
-     AS = 267,
-     INT = 268,
-     BOOL = 269,
-     LP = 270,
-     RP = 271,
-     ASGN = 272,
-     SC = 273,
-     WRITEINT = 274,
-     READINT = 275,
-     SYMBOL = 276,
-     ident = 277,
-     num = 278,
-     boollit = 279,
-     OP2 = 280,
-     OP3 = 281,
-     OP4 = 282,
+     OP2 = 258,
+     OP3 = 259,
+     OP4 = 260,
+     PROGRAM = 261,
+     IF = 262,
+     THEN = 263,
+     ELSE = 264,
+     BEGINI = 265,
+     END = 266,
+     WHILE = 267,
+     DO = 268,
+     VAR = 269,
+     AS = 270,
+     INT = 271,
+     BOOL = 272,
+     LP = 273,
+     RP = 274,
+     ASGN = 275,
+     SC = 276,
+     WRITEINT = 277,
+     READINT = 278,
+     SYMBOL = 279,
+     ident = 280,
+     num = 281,
+     boollit = 282,
      identifierType = 283
    };
 #endif
 /* Tokens.  */
-#define PROGRAM 258
-#define IF 259
-#define THEN 260
-#define ELSE 261
-#define BEGINI 262
-#define END 263
-#define WHILE 264
-#define DO 265
-#define VAR 266
-#define AS 267
-#define INT 268
-#define BOOL 269
-#define LP 270
-#define RP 271
-#define ASGN 272
-#define SC 273
-#define WRITEINT 274
-#define READINT 275
-#define SYMBOL 276
-#define ident 277
-#define num 278
-#define boollit 279
-#define OP2 280
-#define OP3 281
-#define OP4 282
+#define OP2 258
+#define OP3 259
+#define OP4 260
+#define PROGRAM 261
+#define IF 262
+#define THEN 263
+#define ELSE 264
+#define BEGINI 265
+#define END 266
+#define WHILE 267
+#define DO 268
+#define VAR 269
+#define AS 270
+#define INT 271
+#define BOOL 272
+#define LP 273
+#define RP 274
+#define ASGN 275
+#define SC 276
+#define WRITEINT 277
+#define READINT 278
+#define SYMBOL 279
+#define ident 280
+#define num 281
+#define boollit 282
 #define identifierType 283
 
 

@@ -4,11 +4,11 @@
 #include <math.h>
 #include "nodes.h"
 #include <stdarg.h>
-extern yylineno;
+extern int yylineno;
 
 Exp* var(char* name);
-Exp* lit(int value);
-Exp* str(char* str);
+Exp* lit(struct symbol *symbole);
+Exp* str(struct symbol *symbol);
 double eval(struct Exp *e);
 
 int SymbolHash(char *symbol) {
@@ -77,7 +77,7 @@ struct symbol *lookUp(char *symbol) {
 
 
 // if the node is a literal node type
-Exp *lit(int value) { 
+Exp *lit(struct symbol *symbol) { 
 	Exp* pntr;
 
 	if ((pntr = malloc(sizeof(Exp))) == NULL) {
@@ -85,19 +85,19 @@ Exp *lit(int value) {
     }
 
 	pntr->types = literalType;
-	pntr->literalNode = value;
+	pntr->symbol = symbol;
 
 	return pntr;
 }
 
-Exp *str(char* str) {
+Exp *str(struct symbol *symbol) {
 	Exp* pntr;
 
 	if ((pntr = malloc(sizeof(Exp))) == NULL) 
 		yyerror("Memory out of bound!");
 	
 	pntr->types = identifierNodeType;
-	pntr->identifierNode = str;
+	pntr->symbol = symbol;
 
 	return pntr;
 }
