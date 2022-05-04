@@ -69,6 +69,7 @@ struct symbol
 	int arrLength;
 	int initialIndex;
 };
+double eval(struct Exp *e);
 
 #define NHASH 9997
 struct symbol symbolTable[NHASH];

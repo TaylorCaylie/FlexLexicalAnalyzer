@@ -40,7 +40,7 @@ into nodes that are emitted by flex */
 %%
 
 program: 
-    PROGRAM declarations BEGINI statements END { $$ = newExp('P', $2, $4); }
+    PROGRAM declarations BEGINI statements END { eval($2); eval($4); }
     ;
 
 declarations:

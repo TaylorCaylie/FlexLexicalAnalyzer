@@ -9,6 +9,7 @@ extern yylineno;
 Exp* var(char* name);
 Exp* lit(int value);
 Exp* str(char* str);
+double eval(struct Exp *e);
 
 int SymbolHash(char *symbol) {
 	unsigned int hash = 0;
@@ -44,7 +45,7 @@ struct Exp *newExp(int expType, Exp *left, Exp *right) {
 }
 
 void yyerror(char *s) {
-	printf("Error: %s : %d\n",s,yylineno);
+	printf("Error: %s : %d\n", s, yylineno);
 }
 
 struct symbol *lookUp(char *symbol) {
@@ -99,6 +100,23 @@ Exp *str(char* str) {
 	pntr->identifierNode = str;
 
 	return pntr;
+}
+
+double eval(struct Exp *e) {
+    if(!e) {
+		yyerror("expression passed in is null");
+
+		return 0.0;
+	}
+
+    double type;
+    switch(e->expType) {
+        case 'S':
+        default:
+            printf("invalid node type %c", e->expType);
+    }
+
+    return type;
 }
 
 // two possible types to be declared for a variable - either number or bool
