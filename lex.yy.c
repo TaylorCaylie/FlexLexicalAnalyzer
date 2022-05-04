@@ -355,8 +355,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 28
-#define YY_END_OF_BUFFER 29
+#define YY_NUM_RULES 26
+#define YY_END_OF_BUFFER 27
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -366,15 +366,15 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[92] =
     {   0,
-        0,    0,   29,   28,   27,    8,    8,   28,    4,    1,
-        5,    1,    1,   26,    1,    5,    1,    5,    1,    1,
-        7,    6,   28,   28,   28,   28,   28,   28,   28,   28,
-       28,   28,   28,    1,    8,    9,   26,   20,    0,    0,
+        0,    0,   27,   26,   25,    8,    8,   26,    4,    1,
+        5,    1,    1,   24,    1,    5,    1,    5,    1,    1,
+        7,    6,   26,   26,   26,   26,   26,   26,   26,   26,
+       26,   26,   26,    1,    8,    9,   24,   20,    0,    0,
        17,    0,    0,    0,   11,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,   15,    0,    2,
-        0,    0,    0,    0,   19,    0,    0,   23,    0,    3,
+        0,    0,    0,    0,   19,    0,    0,   21,    0,    3,
        13,    0,    0,    0,   12,   10,    0,    0,   14,    0,
-        0,   16,    0,    0,    0,    0,   18,   24,    0,   25,
+        0,   16,    0,    0,    0,    0,   18,   22,    0,   23,
         0
 
     } ;
@@ -818,21 +818,23 @@ case 2:
 YY_RULE_SETUP
 #line 67 "flexanalyzer.l"
 {
+    printf("type: %s\n", yytext);
     yylval.typeIdent = 'a';
     return identifierType;
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 72 "flexanalyzer.l"
+#line 73 "flexanalyzer.l"
 {
+    printf("type: %s\n", yytext);
     yylval.typeIdent = 'a';
     return identifierType;
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 77 "flexanalyzer.l"
+#line 79 "flexanalyzer.l"
 {
      printf("SC: %s\n", yytext);
     return yytext[0];
@@ -840,7 +842,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 82 "flexanalyzer.l"
+#line 84 "flexanalyzer.l"
 {
     printf("SINGLE CHAR: %s\n", yytext);
     return yytext[0];
@@ -848,7 +850,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 87 "flexanalyzer.l"
+#line 89 "flexanalyzer.l"
 {
     printf("OP3 OPERATOR: %s\n", yytext);
     if (strcmp(yytext, "+") == 0) {
@@ -862,7 +864,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 98 "flexanalyzer.l"
+#line 100 "flexanalyzer.l"
 {
     printf("OP2 OPERATOR: %s\n", yytext);
     if (strcmp(yytext, "*") == 0) {
@@ -878,7 +880,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 111 "flexanalyzer.l"
+#line 113 "flexanalyzer.l"
 {
     // yylval=atof(yytext);
     printf("integer: %s\n", yytext);
@@ -888,7 +890,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 118 "flexanalyzer.l"
+#line 120 "flexanalyzer.l"
 {
     printf("ASGN: %s\n", yytext);
     return(ASGN); 
@@ -896,7 +898,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 123 "flexanalyzer.l"
+#line 125 "flexanalyzer.l"
 {
     if (strcmp(yytext, "false") == 0) {
         yylval.boolVal = 0;
@@ -909,42 +911,42 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 133 "flexanalyzer.l"
+#line 135 "flexanalyzer.l"
 return(IF);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 134 "flexanalyzer.l"
+#line 136 "flexanalyzer.l"
 return(THEN);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 135 "flexanalyzer.l"
+#line 137 "flexanalyzer.l"
 return(ELSE);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 136 "flexanalyzer.l"
+#line 138 "flexanalyzer.l"
 return(BEGINI);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 137 "flexanalyzer.l"
+#line 139 "flexanalyzer.l"
 return(END);
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 138 "flexanalyzer.l"
+#line 140 "flexanalyzer.l"
 return(WHILE);
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 139 "flexanalyzer.l"
+#line 141 "flexanalyzer.l"
 return(DO);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 140 "flexanalyzer.l"
+#line 142 "flexanalyzer.l"
 {
     printf("keyword: %s\n", yytext);
     return(PROGRAM);
@@ -952,7 +954,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 144 "flexanalyzer.l"
+#line 146 "flexanalyzer.l"
 {
     printf("keyword: %s\n", yytext);
     return(VAR);
@@ -960,7 +962,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 148 "flexanalyzer.l"
+#line 150 "flexanalyzer.l"
 {
     printf("keyword: %s\n", yytext);
     return(AS);
@@ -968,44 +970,28 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 152 "flexanalyzer.l"
-{
-    printf("type: %s\n", yytext);
-    return(INT);
-}
+#line 155 "flexanalyzer.l"
+return(ASGN);
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 156 "flexanalyzer.l"
-{
-    printf("type: %s\n", yytext);
-    return(BOOL);
-}
-	YY_BREAK
-case 23:
-YY_RULE_SETUP
-#line 161 "flexanalyzer.l"
-return(ASGN);
-	YY_BREAK
-case 24:
-YY_RULE_SETUP
-#line 163 "flexanalyzer.l"
+#line 157 "flexanalyzer.l"
 {
     printf("Built-In Procedure: %s\n", yytext);
     return(READINT);
 }
 	YY_BREAK
-case 25:
+case 23:
 YY_RULE_SETUP
-#line 168 "flexanalyzer.l"
+#line 162 "flexanalyzer.l"
 {
     printf("Built-In Procedure: %s\n", yytext);
     return(WRITEINT);
 }
 	YY_BREAK
-case 26:
+case 24:
 YY_RULE_SETUP
-#line 173 "flexanalyzer.l"
+#line 167 "flexanalyzer.l"
 {
     // yylval=atof(yytext);
     printf("identifier: %s\n", yytext);
@@ -1014,18 +1000,18 @@ YY_RULE_SETUP
     return(SYMBOL);
 }
 	YY_BREAK
-case 27:
-/* rule 27 can match eol */
+case 25:
+/* rule 25 can match eol */
 YY_RULE_SETUP
-#line 181 "flexanalyzer.l"
+#line 175 "flexanalyzer.l"
 {yylineno++;}
 	YY_BREAK
-case 28:
+case 26:
 YY_RULE_SETUP
-#line 184 "flexanalyzer.l"
+#line 178 "flexanalyzer.l"
 ECHO;
 	YY_BREAK
-#line 1028 "lex.yy.c"
+#line 1014 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2030,7 +2016,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 184 "flexanalyzer.l"
+#line 178 "flexanalyzer.l"
 
 
 

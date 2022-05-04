@@ -76,7 +76,7 @@ struct symbol *lookUp(char *);
 
 struct symbolAssign 
 {
-	int nodeType;
+	char* nodeType;
 
 	struct symbol *symbol;
 

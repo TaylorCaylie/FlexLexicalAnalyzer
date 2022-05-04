@@ -65,11 +65,13 @@ ID [A-Z][A-Z0-9]*
 }
 
 "int" {
+    printf("type: %s\n", yytext);
     yylval.typeIdent = 'a';
     return identifierType;
 }
 
 "bool" {
+    printf("type: %s\n", yytext);
     yylval.typeIdent = 'a';
     return identifierType;
 }
@@ -148,14 +150,6 @@ ID [A-Z][A-Z0-9]*
 "as" {
     printf("keyword: %s\n", yytext);
     return(AS);
-}
-"int" {
-    printf("type: %s\n", yytext);
-    return(INT);
-}
-"bool" {
-    printf("type: %s\n", yytext);
-    return(BOOL);
 }
 
 "asgn" return(ASGN);

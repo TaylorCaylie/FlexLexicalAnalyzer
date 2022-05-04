@@ -5,6 +5,7 @@
 #include <stdarg.h>
 #include <string.h>
 extern FILE *yyin;
+extern yylineno;
 %}
 
 
@@ -39,7 +40,7 @@ into nodes that are emitted by flex */
 %%
 
 program: 
-    PROGRAM declarations BEGINI statements END
+    PROGRAM declarations BEGINI statements END { $$ = newExp('P', $2, $4); }
     ;
 
 declarations:
@@ -67,12 +68,12 @@ statementExpression:
     ;
 
 assignment:
-    ident ASGN expression { $$ = newAssign($1, $3) }
-	| ident ASGN READINT { $$ = newAssign($1, $3); }
+    ident ASGN expression { $$ = newAssign($1, $3); }
+	| ident ASGN READINT { $$ = newExp('A', $1, $3); }
 	;
 
 writeInt:
-	WRITEINT expression { $$ = newExp('WI', $2, NULL); }
+	WRITEINT expression { $$ = newExp('R', $2, NULL); }
 	;
 
 expression:

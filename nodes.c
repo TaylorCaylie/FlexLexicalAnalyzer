@@ -4,6 +4,7 @@
 #include <math.h>
 #include "nodes.h"
 #include <stdarg.h>
+extern yylineno;
 
 Exp* var(char* name);
 Exp* lit(int value);
@@ -43,7 +44,7 @@ struct Exp *newExp(int expType, Exp *left, Exp *right) {
 }
 
 void yyerror(char *s) {
-	fprintf(stderr, "error: %s\n", s);
+	printf("Error: %s : %d\n",s,yylineno);
 }
 
 struct symbol *lookUp(char *symbol) {
@@ -126,7 +127,7 @@ struct Exp *newAssign(struct symbol *symbol, struct Exp *v) {
 		exit(0);
 	}
 
-	sa->nodeType = ':=';
+	sa->nodeType = ":=";
 	sa->symbol = symbol;
 	sa->v = v;
 
