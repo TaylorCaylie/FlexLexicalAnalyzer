@@ -32,7 +32,7 @@ struct declaration
 {
 	int nodeType;
 
-	struct symbolList *symbolList;
+	struct symbol *symbol;
 
 	char type;
 };
@@ -54,7 +54,7 @@ typedef struct Exp {
 } Exp;
 
 struct Exp *newExp(int expType, Exp *left, Exp *right);
-struct Exp *newDeclaration(struct symbolList *symbolList, char type);
+struct Exp *newDeclaration(struct symbol *symbol, char type);
 struct Exp *str(char* str);
 struct Exp *lit(int value);
 

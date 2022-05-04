@@ -14,7 +14,7 @@ into nodes that are emitted by flex */
 %union{
     int number;
     int boolVal;
-    char* str;
+    char str;
     Exp *statements;
     int fn;
     double d;
@@ -24,16 +24,16 @@ into nodes that are emitted by flex */
 }
 
 /* declare tokens */
-%token <number> num boollit OP2 OP3 OP4
+
 %token PROGRAM IF THEN ELSE BEGINI END WHILE DO VAR AS INT BOOL LP RP ASGN SC
-%token <str> READINT WRITEINT 
-%token <symbol> SYMBOL ident
+%token <str> WRITEINT READINT
+%token <symbol> SYMBOL ident num boollit OP2 OP3 OP4
 %token <typeIdent> identifierType
 
 
 /* types */
 %type <statements> declarations statements statementExpression simpleExpression declaration assignment writeInt expression factor term
-%type <symbolList> symbolList
+
 
 /* start from expression */
 %start program
@@ -49,7 +49,7 @@ declarations:
     ;
 
 declaration:
-    VAR symbolList AS identifierType { $$ = newDeclaration($2, $4); }
+    VAR SYMBOL AS identifierType { $$ = newDeclaration($2, $4); }
 	| { $$ = NULL;  }
 	;
 
@@ -69,7 +69,7 @@ statementExpression:
 
 assignment:
     ident ASGN expression { $$ = newAssign($1, $3); }
-	| ident ASGN READINT { $$ = newExp('A', $1, $3); }
+	| ident ASGN READINT { $$ = newDeclaration($1, $3);; }
 	;
 
 writeInt:
@@ -102,8 +102,6 @@ factor:
  	    }
 	| LP expression RP { $$ = $2; }
 	;
-
-symbolList: SYMBOL { $$ = newSymbolList($1, NULL); };
 
 %%
 

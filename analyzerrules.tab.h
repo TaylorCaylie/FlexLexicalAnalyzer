@@ -39,60 +39,60 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     num = 258,
-     boollit = 259,
-     OP2 = 260,
-     OP3 = 261,
-     OP4 = 262,
-     PROGRAM = 263,
-     IF = 264,
-     THEN = 265,
-     ELSE = 266,
-     BEGINI = 267,
-     END = 268,
-     WHILE = 269,
-     DO = 270,
-     VAR = 271,
-     AS = 272,
-     INT = 273,
-     BOOL = 274,
-     LP = 275,
-     RP = 276,
-     ASGN = 277,
-     SC = 278,
-     READINT = 279,
-     WRITEINT = 280,
-     SYMBOL = 281,
-     ident = 282,
+     PROGRAM = 258,
+     IF = 259,
+     THEN = 260,
+     ELSE = 261,
+     BEGINI = 262,
+     END = 263,
+     WHILE = 264,
+     DO = 265,
+     VAR = 266,
+     AS = 267,
+     INT = 268,
+     BOOL = 269,
+     LP = 270,
+     RP = 271,
+     ASGN = 272,
+     SC = 273,
+     WRITEINT = 274,
+     READINT = 275,
+     SYMBOL = 276,
+     ident = 277,
+     num = 278,
+     boollit = 279,
+     OP2 = 280,
+     OP3 = 281,
+     OP4 = 282,
      identifierType = 283
    };
 #endif
 /* Tokens.  */
-#define num 258
-#define boollit 259
-#define OP2 260
-#define OP3 261
-#define OP4 262
-#define PROGRAM 263
-#define IF 264
-#define THEN 265
-#define ELSE 266
-#define BEGINI 267
-#define END 268
-#define WHILE 269
-#define DO 270
-#define VAR 271
-#define AS 272
-#define INT 273
-#define BOOL 274
-#define LP 275
-#define RP 276
-#define ASGN 277
-#define SC 278
-#define READINT 279
-#define WRITEINT 280
-#define SYMBOL 281
-#define ident 282
+#define PROGRAM 258
+#define IF 259
+#define THEN 260
+#define ELSE 261
+#define BEGINI 262
+#define END 263
+#define WHILE 264
+#define DO 265
+#define VAR 266
+#define AS 267
+#define INT 268
+#define BOOL 269
+#define LP 270
+#define RP 271
+#define ASGN 272
+#define SC 273
+#define WRITEINT 274
+#define READINT 275
+#define SYMBOL 276
+#define ident 277
+#define num 278
+#define boollit 279
+#define OP2 280
+#define OP3 281
+#define OP4 282
 #define identifierType 283
 
 
@@ -104,7 +104,7 @@ typedef union YYSTYPE
 {
     int number;
     int boolVal;
-    char* str;
+    char str;
     Exp *statements;
     int fn;
     double d;

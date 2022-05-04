@@ -120,7 +120,7 @@ double eval(struct Exp *e) {
 }
 
 // two possible types to be declared for a variable - either number or bool
-struct Exp *newDeclaration(struct symbolList *symbolList, char type) {
+struct Exp *newDeclaration(struct symbol *symbol, char type) {
 	struct declaration *d = malloc(sizeof(struct declaration));
 
 	if(!d) {
@@ -130,7 +130,7 @@ struct Exp *newDeclaration(struct symbolList *symbolList, char type) {
 	}
 
 	d->nodeType ='X';
-	d->symbolList = symbolList;
+	d->symbol = symbol;
 	d->type = type;
 
 	return (Exp *)d;
