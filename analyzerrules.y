@@ -26,7 +26,7 @@ into nodes that are emitted by flex */
 /* declare tokens */
 
 %token <number> OP2 OP3 OP4
-%token PROGRAM IF THEN ELSE BEGINI END WHILE DO VAR AS INT BOOL LP RP ASGN SC
+%token PROGRAM IF THEN ELSE BEGINI END WHILE DO VAR AS INT BOOL LP RP ASGN SC 
 %token <str> WRITEINT READINT
 %token <symbol> SYMBOL ident num boollit 
 %token <typeIdent> identifierType
@@ -50,26 +50,25 @@ declarations:
     ;
 
 declaration:
-    VAR SYMBOL AS identifierType { $$ = newDeclaration($2, $4); }
+    VAR SYMBOL AS identifierType { $$ = opr(AS, 4, $4, str($2)); }
 	| { $$ = NULL;  }
 	;
 
 statements:
-    statementExpression	{ $$ = $1; }
-    | statements SC statementExpression { $$ = newExp('L', $1, $3); }
+    statements SC statementExpression { $$ = newExp('L', $1, $3); }
+    | statementExpression	{ $$ = $1; }
     | { $$ = NULL; }
     ;
 
 statementExpression:
-    WHILE expression DO statements END { $$ = newExp('W', $2, $4); }
+    assignment { $$ = $1; } 
+    | WHILE expression DO statements END { $$ = newExp('W', $2, $4); }
     | IF expression THEN statements END { $$ = newExp('I', $2, $4); }
     | writeInt expression { $$ = $1; }
-    | assignment { $$ = $1; } 
-    | expression
     ;
 
 assignment:
-    ident ASGN expression { $$ = newAssign($1, $3); }
+    ident ASGN expression { $$ = opr(ASGN, 2, str($1), $3); }
 	| ident ASGN READINT { $$ = newDeclaration($1, $3);; }
 	;
 
@@ -88,12 +87,12 @@ simpleExpression:
 	;
 
 term:
-    factor OP2 factor { $$ = newExp($2, $1, $3); }
+    factor OP2 factor { $$ = opr($2, 2, $1, $3); }
 	| factor { $$ = $1; }
 	;
 
 factor: 
-    ident { $$ = str($1); }
+    ident { $$ = str($1);; }
     | boollit { $$ = lit($1); }
 	| num { $$ = lit($1); }
 	| LP expression RP { $$ = $2; }

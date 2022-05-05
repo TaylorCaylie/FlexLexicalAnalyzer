@@ -44,6 +44,15 @@ ID [A-Z][A-Z0-9]*
 
 /* The rules section of the flex input contains a series of rules of the form: pattern -> action */
 %%
+":=" {
+    return ASGN; 
+}
+
+"div" {
+    printf("div: %s\n", yytext);
+
+    return ident;
+}
 
 {COMPARISONS} {
     printf("COMP OPERATOR: %s\n", yytext);
@@ -77,8 +86,8 @@ ID [A-Z][A-Z0-9]*
 }
 
 ";" {
-     printf("SC: %s\n", yytext);
-    return yytext[0];
+    printf("SC: %s\n", yytext);
+    return SC;
 }
 
 {SINGLECHAR} {
@@ -96,8 +105,8 @@ ID [A-Z][A-Z0-9]*
 
     return(OP3);
 }
-
-{OP2} {
+ 
+{MULTIPLY_OP} {
     printf("OP2 OPERATOR: %s\n", yytext);
     if (strcmp(yytext, "*") == 0) {
         yylval.number = MULTIPLY;
@@ -115,11 +124,6 @@ ID [A-Z][A-Z0-9]*
     printf("integer: %s\n", yytext);
     yylval.number = atof(yytext); 
     return(num);
-}
-
-":=" {
-    printf("ASGN: %s\n", yytext);
-    return(ASGN); 
 }
 
 {BOOLEX} {
@@ -151,8 +155,6 @@ ID [A-Z][A-Z0-9]*
     printf("keyword: %s\n", yytext);
     return(AS);
 }
-
-"asgn" return(ASGN);
 
 "readInt" {
     printf("Built-In Procedure: %s\n", yytext);

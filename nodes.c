@@ -9,6 +9,7 @@ extern int yylineno;
 Exp* var(char* name);
 Exp* lit(struct symbol *symbole);
 Exp* str(struct symbol *symbol);
+Exp* opr(int operation, int ops, ...);
 double eval(struct Exp *e);
 
 int SymbolHash(char *symbol) {
@@ -40,12 +41,12 @@ struct Exp *newExp(int expType, Exp *left, Exp *right) {
 	expression->expType = expType;
 	expression->left = left;
 	expression->right = right;
-
 	return expression;
+    
 }
 
 void yyerror(char *s) {
-	printf("Error: %s : %d\n", s, yylineno);
+	printf("Error: %s: line number %d\n", s, yylineno);
 }
 
 struct symbol *lookUp(char *symbol) {
@@ -121,7 +122,7 @@ double eval(struct Exp *e) {
 
 // two possible types to be declared for a variable - either number or bool
 struct Exp *newDeclaration(struct symbol *symbol, char type) {
-	struct declaration *d = malloc(sizeof(struct declaration));
+    struct declaration *d = malloc(sizeof(struct declaration));
 
 	if(!d) {
 		yyerror("out of space");
@@ -150,6 +151,27 @@ struct Exp *newAssign(struct symbol *symbol, struct Exp *v) {
 	sa->v = v;
 
 	return (struct Exp *)sa;
+}
+
+Exp* opr(int operation, int ops, ...) { // For operators
+	printf("hi");
+    Exp* assi;
+
+	int i;
+
+	if ((assi = malloc(sizeof(Exp))) == NULL)  // memory not available
+		yyerror("out of memory");
+
+	if ((assi->oper.operands = malloc(ops * sizeof(Exp*))) == NULL) // memory not available
+		yyerror("out of memory!");
+
+    assi->oper.numops = ops;
+
+	assi->types = operatorType;
+
+	assi->oper.operation = operation;
+    
+	return assi;
 }
 
 struct symbolList *newSymbolList(struct symbol *symbol, struct symbolList *next) {

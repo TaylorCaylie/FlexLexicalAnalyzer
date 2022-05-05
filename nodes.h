@@ -37,6 +37,12 @@ struct declaration
 	char type;
 };
 
+typedef struct {
+	int operation;
+	int numops;
+	struct opType **operands;
+} operatorNode;
+
 // if its an operator type encapsulates another type
 // can either be an identifier, literal, or number
 typedef struct Exp {
@@ -45,8 +51,8 @@ typedef struct Exp {
     union {
         int literalNode;
         char* identifierNode;
+        operatorNode oper;
     };
-
 
     struct symbol *symbol;
     TypesNodes types;
@@ -86,6 +92,7 @@ struct symbolAssign
 	struct Exp *v;
 };
 
+Exp* opr(int operation, int ops, ...);
 struct Exp *newAssign(struct symbol *symbol, struct Exp *v); 
 
 struct symbolList 

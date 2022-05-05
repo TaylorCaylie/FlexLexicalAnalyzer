@@ -60,8 +60,8 @@
      SC = 276,
      WRITEINT = 277,
      READINT = 278,
-     SYMBOL = 279,
-     ident = 280,
+     ident = 279,
+     SYMBOL = 280,
      num = 281,
      boollit = 282,
      identifierType = 283
@@ -89,8 +89,8 @@
 #define SC 276
 #define WRITEINT 277
 #define READINT 278
-#define SYMBOL 279
-#define ident 280
+#define ident 279
+#define SYMBOL 280
 #define num 281
 #define boollit 282
 #define identifierType 283
